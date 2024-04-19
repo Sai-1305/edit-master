@@ -21,7 +21,9 @@ st.markdown(
         EditMaster features built-in photo editing functions to make it the ideal tool for perfecting pictures. The easy-to-use free photo editor offers decolorizing and background removal options for professional quality results right at your fingertips.
 
         Start editing by clicking on either one of the buttons.
-
+        <br/>
+        <br/>
+        <br/>
     """,
     unsafe_allow_html=True
 )
