@@ -27,7 +27,28 @@ def decolorizeImage(uploadedImage, outputDirectory):
 
 # ====================================================
 
-# removeBackground()
+def removeBackground(uploadedImage, outputDirectory):
+    inputImage = Image.open(uploadedImage)
+    inputImage = inputImage.convert("RGBA")
+    
+    # Save the image to a temporary file (.jpg format)
+    tempImage = "tempImage.jpg"
+    inputImage.save(tempImage,format = "PNG")
+    
+    # Perform background removal using rembg
+    with open(tempImage, "rb") as f: # r: open for reading. b: binary mode
+        imageData = f.read()
+        imageData = remove(imageData)
+    
+    # Remove the temporary image file
+    os.remove(tempImage)
+    
+    # Save the background-removed image to the specified output directory
+    outputPath = os.path.join(outputDirectory, "No-background Image.png")
+    with open(outputPath, "wb") as f: # w: open for writing. b: binary mode
+        f.write(imageData)
+    
+    return outputPath
 
 # ====================================================
 
