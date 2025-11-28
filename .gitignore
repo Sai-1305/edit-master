@@ -1,0 +1,30 @@
+# Python virtual environment
+edit_master_venv/
+venv/
+ENV/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code settings
+.vscode/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Streamlit temporary files
+.streamlit/
+
+# Log files
+*.log
+
+# Any temporary image files you might create
+*.tmp
+*.temp
+
+# Rembg temporary images (if any)
+tempImage.jpg

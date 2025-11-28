@@ -1,48 +1,45 @@
-from rembg import remove 
-from PIL import Image
 import streamlit as st
+from main import remove_background
 from streamlit_extras.switch_page_button import switch_page
-from pages.main import removeBackground
 
 # ====================================================
 st.set_page_config(
     page_title = "EditMaster::Remove Background",
-    page_icon = "images\EditMaster-logo2.png",
+    page_icon = "images/EditMaster-logo2.png",
     layout = "centered",
 )
 # ====================================================
 
-st.page_link("Home.py", label="🏠 Home", icon="🔙")
 st.title("Remove the Background 🔥")
+
+# Home navigation button
+if st.button("🏠 Home"):
+    switch_page("Home")
+
+
 st.markdown(
     """
         ### 1. Upload your image.
         Add an image from your device.
 
-        ### 2. Specify output folder.
-        Provide the path of the folder that you want your background-free image to be saved to. And then press the "Enter" key.
-
-        ### 3. Remove Background
-        Click on the "Remove Background" button to start the conversion.
+        ### 2. Remove Background
+        Click on the "Remove Background" button to convert the image into no-background image.
 
     """,
     unsafe_allow_html=True
 )
 
 
-uploadedImage = st.file_uploader('Upload an image to remove the color:', type = ["jpg","png"])
+uploaded_image = st.file_uploader('Upload an image to remove the color:', type = ["jpg","png"])
 
-outputDirectory = st.text_input('Enter the path of output directory:')
-
-if uploadedImage is not None:
+if uploaded_image is not None:
 
     # Display the image
-    st.image(uploadedImage, caption = "Uploaded Image", use_column_width = True)
+    st.image(uploaded_image, caption = "Uploaded Image", use_column_width = True)
 
-    if outputDirectory != "":
-        
-        if st.button('Remove Background',help = "Submit to remove the background from the image."):
-            success=removeBackground(uploadedImage,outputDirectory)
+    if st.button('Remove Background',help = "Submit to remove the background from the image."):
+        no_bg_bytes=remove_background(uploaded_image)
 
-            if success:
-                st.success(f"No-background image saved successfully to {outputDirectory}")
+        if no_bg_bytes:
+            st.success(f"Background removal complete!")
+            st.download_button(label="Download Image with Transparent Background", data=no_bg_bytes.getvalue(), file_name="no_bg_image.png", mime="image/png")

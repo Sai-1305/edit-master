@@ -5,7 +5,7 @@ from streamlit_extras.switch_page_button import switch_page
 
 st.set_page_config(
     page_title = "EditMaster::Home",
-    page_icon = "images\EditMaster-logo2.png",
+    page_icon = "images/EditMaster-logo2.png",
     layout = "centered",
 )
 
